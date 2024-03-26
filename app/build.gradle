@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "cz.dzubera.qrprint"
+        minSdkVersion 24
+        targetSdkVersion 34
+        versionCode 7
+        versionName "datamax-1.5"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    namespace 'cz.dzubera.qrprint'
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation 'com.google.zxing:core:3.3.3'
+
+    implementation (name: 'DO_AndroidSDK_v2.4.9', ext: 'aar')
+
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
