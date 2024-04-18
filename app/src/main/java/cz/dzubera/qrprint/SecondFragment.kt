@@ -50,7 +50,7 @@ class SecondFragment : Fragment() {
             StaticStorage.productCountTotal.toString()
         view.findViewById<TextView>(R.id.time_count).text =
             StaticStorage.productTimer.toString()
-        view.findViewById<TextView>(R.id.version).text = BuildConfig.VERSION_NAME
+        view.findViewById<TextView>(R.id.version).text = BuildConfig.VERSION_NAME + "\n"+"build " + BuildConfig.VERSION_CODE
 
         onConnectionChanged(App.printerConnectionManager.connectionStatus)
 
