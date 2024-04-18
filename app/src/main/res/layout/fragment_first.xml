@@ -282,12 +282,14 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
         android:alpha="0.5"
-
+        android:layout_margin="24dp"
+        android:id="@+id/logo"
         android:src="@drawable/logoxi3"
         app:layout_constraintBottom_toTopOf="@id/print_buttons"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main" />
@@ -295,11 +297,12 @@
     <LinearLayout
         android:id="@+id/print_buttons"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
         <Button
             android:id="@+id/button_print"

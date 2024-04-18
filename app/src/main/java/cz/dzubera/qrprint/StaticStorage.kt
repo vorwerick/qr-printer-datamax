@@ -10,7 +10,7 @@ object StaticStorage {
     var scannedTextProductionCommandNumber = "<žádné>"
     var productCount = 0
     var productCountTotal = 0
-    var productTimer = 0
+    var productTimer = 10
     var printedCount = 0
 
     var datamaxIp = "0.0.0.0"

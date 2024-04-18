@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
@@ -65,6 +67,7 @@ class SecondFragment : Fragment() {
             startActivity(intent)
         }
 
+
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
 
 
@@ -79,9 +82,22 @@ class SecondFragment : Fragment() {
                 .putString("port", StaticStorage.datamaxPort.toString()).apply()
 
 
-            StaticStorage.productTimer =
+            val newValue =
                 view.findViewById<EditText>(R.id.time_count).editableText.toString().toIntOrNull()
                     ?: 0
+            Log.i("HAHAS",newValue.toString())
+            if (newValue < 10) {
+                Toast.makeText(
+                    requireContext(),
+                    "Minimální hodnota je 10 vteřin!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                StaticStorage.productTimer = 10
+            } else {
+                StaticStorage.productTimer = newValue
+            }
+
+
             val prodCount =
                 view.findViewById<EditText>(R.id.pieces_count).editableText.toString().toIntOrNull()
                     ?: 0
