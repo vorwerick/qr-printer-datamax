@@ -1,11 +1,10 @@
-package cz.dzubera.qrprint
+package cz.dzubera.qrprint.zebra
 
 import android.app.Application
 
 class App: Application() {
 
     companion object{
-        val printerConnectionManager: PrinterConnectionManager by lazy { PrinterConnectionManager() }
         val timeManager: TimerManager by lazy { TimerManager() }
     }
 

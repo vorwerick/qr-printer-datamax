@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.QRPrint" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/han_purple</item>
+        <item name="colorPrimary">@color/brunswick_green</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" >@color/brunswick_green</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

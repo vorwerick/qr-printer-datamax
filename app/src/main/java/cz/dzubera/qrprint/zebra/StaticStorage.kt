@@ -1,4 +1,4 @@
-package cz.dzubera.qrprint
+package cz.dzubera.qrprint.zebra
 
 
 object StaticStorage {

@@ -16,274 +16,294 @@
        app:layout_constraintTop_toTopOf="parent"
        >
        <LinearLayout
-           android:id="@+id/layout_ip_address"
+
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:orientation="horizontal"
+           android:orientation="vertical"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent">
 
            <androidx.cardview.widget.CardView
-               android:layout_width="0dp"
-
-               android:layout_height="wrap_content"
-               android:layout_marginHorizontal="8dp"
-               android:layout_marginTop="8dp"
-               android:layout_weight="1"
-               android:backgroundTint="@color/kombu_green_dark"
-               app:cardCornerRadius="4dp"
-               app:cardElevation="4dp">
-
-               <TextView
-                   android:id="@+id/connected_ip_address"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp"
-
-                   />
-           </androidx.cardview.widget.CardView>
-
-
-           <androidx.cardview.widget.CardView
-               android:id="@+id/connection_status_card"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="8dp"
-               android:layout_marginRight="8dp"
-               android:backgroundTint="@color/kombu_green_dark"
-               app:cardCornerRadius="4dp"
-               app:cardElevation="4dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent">
-
-               <TextView
-                   android:id="@+id/connection_status"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp" />
-           </androidx.cardview.widget.CardView>
-       </LinearLayout>
-
-       <androidx.cardview.widget.CardView
-           android:id="@+id/layout_date_time"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginHorizontal="8dp"
-           android:layout_marginTop="16dp"
-           android:layout_weight="1"
-           android:backgroundTint="@color/kombu_green_dark"
-           app:cardCornerRadius="4dp"
-           app:cardElevation="4dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/layout_ip_address">
-
-           <TextView
-               android:id="@+id/date_time"
                android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_gravity="center"
-               android:layout_margin="8dp"
-               android:gravity="start"
-               android:textColor="@color/ivory"
-               android:textSize="24sp"
-
-               />
-       </androidx.cardview.widget.CardView>
-
-       <LinearLayout
-           android:id="@+id/layout_product_count"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/layout_date_time">
-
-           <androidx.cardview.widget.CardView
-               android:layout_width="0dp"
-
+               android:id="@+id/layout_ip_address"
                android:layout_height="wrap_content"
                android:layout_marginHorizontal="8dp"
+               android:layout_marginVertical="8dp"
                android:layout_marginTop="16dp"
-               android:layout_weight="1"
                android:backgroundTint="@color/kombu_green_dark"
                app:cardCornerRadius="4dp"
                app:cardElevation="4dp">
 
-               <TextView
-                   android:id="@+id/package_count"
+               <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:text="Počet kusů v balení"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp"
-
-                   />
-           </androidx.cardview.widget.CardView>
-
-
-           <androidx.cardview.widget.CardView
-               android:id="@+id/layout_pieces_count"
-
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="16dp"
-               android:layout_marginRight="8dp"
-               android:backgroundTint="@color/kombu_green_dark"
-               app:cardCornerRadius="4dp"
-               app:cardElevation="4dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent">
-
-               <TextView
-                   android:id="@+id/product_count"
-                   android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp" />
-           </androidx.cardview.widget.CardView>
-       </LinearLayout>
+                   android:orientation="vertical">
 
-       <LinearLayout
-           android:visibility="gone"
-           android:id="@+id/layout_message_last_product"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintBottom_toTopOf="@id/layout_printed_count"
-           app:layout_constraintTop_toBottomOf="@id/layout_product_count">
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       android:text="Stav připojení"
+                       android:textColor="@color/ivory_dark" />
+
+                   <TextView
+                       android:id="@+id/ip_address_text"
+
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="8dp"
+                       android:layout_marginBottom="8dp"
+
+                       android:textColor="@color/ivory"
+                       android:textColorHint="@color/ivory"
+                       android:textSize="24sp" />
+               </LinearLayout>
+           </androidx.cardview.widget.CardView>
 
            <androidx.cardview.widget.CardView
-               android:layout_width="0dp"
-
+               android:layout_width="match_parent"
+               android:id="@+id/layout_date_time"
                android:layout_height="wrap_content"
                android:layout_marginHorizontal="8dp"
-               android:layout_marginTop="8dp"
-               android:layout_weight="1"
-               android:backgroundTint="@color/red"
-               app:cardCornerRadius="4dp"
-               app:cardElevation="4dp">
-
-               <TextView
-                   android:id="@+id/message_last_product"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:textStyle="bold"
-                   android:text="Poslední štítek v obalu!"
-                   android:textColor="@color/ivory"
-                   android:textSize="18sp"
-
-                   />
-           </androidx.cardview.widget.CardView>
-       </LinearLayout>
-
-       <LinearLayout
-           android:id="@+id/layout_printed_count"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/layout_message_last_product">
-
-           <androidx.cardview.widget.CardView
-               android:layout_width="0dp"
-
-               android:layout_height="wrap_content"
-               android:layout_marginHorizontal="8dp"
-               android:layout_marginTop="16dp"
-               android:layout_weight="1"
+               android:layout_marginVertical="8dp"
                android:backgroundTint="@color/kombu_green_dark"
                app:cardCornerRadius="4dp"
                app:cardElevation="4dp">
 
-               <TextView
+               <LinearLayout
                    android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:text="Vytisknutých kódů"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp"
-
-                   />
-           </androidx.cardview.widget.CardView>
-
-           <androidx.cardview.widget.CardView
-
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="16dp"
-               android:layout_marginRight="8dp"
-               android:backgroundTint="@color/kombu_green_dark"
-               app:cardCornerRadius="4dp"
-               app:cardElevation="4dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent">
-
-               <TextView
-                   android:id="@+id/printed_count"
-                   android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   android:layout_margin="8dp"
-                   android:textColor="@color/ivory"
-                   android:textSize="24sp" />
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="8dp"
+                       android:text="Tiskne se"
+                       android:textColor="@color/ivory_dark" />
+
+                   <TextView
+                       android:id="@+id/code_text"
+
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="8dp"
+                       android:layout_marginBottom="8dp"
+
+                       android:textColor="@color/ivory"
+                       android:textColorHint="@color/ivory"
+                       android:textSize="24sp" />
+               </LinearLayout>
            </androidx.cardview.widget.CardView>
+
        </LinearLayout>
 
-       <androidx.cardview.widget.CardView
-           android:id="@+id/layout_production_code"
+       <Button
+           android:id="@+id/button_change_code"
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="match_parent"
            android:layout_marginHorizontal="8dp"
-           android:layout_marginTop="16dp"
-           android:backgroundTint="@color/kombu_green_dark"
-           app:cardCornerRadius="4dp"
-           app:cardElevation="4dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/layout_printed_count">
+           android:layout_marginBottom="16dp"
+           android:backgroundTint="@color/brunswick_green"
+           android:elevation="16dp"
+           android:shadowColor="@color/black"
+           android:shadowDx="2"
+           android:shadowDy="2"
+           android:text="Změnit kód"
+           android:textColor="@color/ivory"
+           android:textSize="28sp" />
+    <!--
+         <LinearLayout
+             android:id="@+id/layout_product_count"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/layout_date_time">
 
-           <TextView
-               android:id="@+id/production_code"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:layout_margin="8dp"
-               android:ellipsize="marquee"
-               android:fadingEdge="horizontal"
-               android:focusable="true"
-               android:focusableInTouchMode="true"
-               android:marqueeRepeatLimit="marquee_forever"
-               android:scrollHorizontally="true"
-               android:singleLine="true"
-               android:textColor="@color/ivory"
-               android:textSize="24sp" />
 
-       </androidx.cardview.widget.CardView>
-   </LinearLayout>
+             <androidx.cardview.widget.CardView
+                 android:layout_width="0dp"
+
+                 android:layout_height="wrap_content"
+                 android:layout_marginHorizontal="8dp"
+                 android:layout_marginTop="16dp"
+                 android:layout_weight="1"
+                 android:backgroundTint="@color/kombu_green_dark"
+                 app:cardCornerRadius="4dp"
+                 app:cardElevation="4dp">
+
+                 <TextView
+                     android:id="@+id/package_count"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_gravity="center"
+                     android:layout_margin="8dp"
+                     android:text="Počet kusů v balení"
+                     android:textColor="@color/ivory"
+                     android:textSize="24sp"
+
+                     />
+             </androidx.cardview.widget.CardView>
+
+
+             <androidx.cardview.widget.CardView
+                 android:id="@+id/layout_pieces_count"
+
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+                 android:layout_marginRight="8dp"
+                 android:backgroundTint="@color/kombu_green_dark"
+                 app:cardCornerRadius="4dp"
+                 app:cardElevation="4dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent">
+
+                 <TextView
+                     android:id="@+id/product_count"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_margin="8dp"
+                     android:textColor="@color/ivory"
+                     android:textSize="24sp" />
+             </androidx.cardview.widget.CardView>
+         </LinearLayout>
+
+         <LinearLayout
+             android:visibility="gone"
+             android:id="@+id/layout_message_last_product"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintBottom_toTopOf="@id/layout_printed_count"
+             app:layout_constraintTop_toBottomOf="@id/layout_product_count">
+
+             <androidx.cardview.widget.CardView
+                 android:layout_width="0dp"
+
+                 android:layout_height="wrap_content"
+                 android:layout_marginHorizontal="8dp"
+                 android:layout_marginTop="8dp"
+                 android:layout_weight="1"
+                 android:backgroundTint="@color/red"
+                 app:cardCornerRadius="4dp"
+                 app:cardElevation="4dp">
+
+                 <TextView
+                     android:id="@+id/message_last_product"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_gravity="center"
+                     android:layout_margin="8dp"
+                     android:textStyle="bold"
+                     android:text="Poslední štítek v obalu!"
+                     android:textColor="@color/ivory"
+                     android:textSize="18sp"
+
+                     />
+             </androidx.cardview.widget.CardView>
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/layout_printed_count"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/layout_message_last_product">
+
+             <androidx.cardview.widget.CardView
+                 android:layout_width="0dp"
+
+                 android:layout_height="wrap_content"
+                 android:layout_marginHorizontal="8dp"
+                 android:layout_marginTop="16dp"
+                 android:layout_weight="1"
+                 android:backgroundTint="@color/kombu_green_dark"
+                 app:cardCornerRadius="4dp"
+                 app:cardElevation="4dp">
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_gravity="center"
+                     android:layout_margin="8dp"
+                     android:text="Vytisknutých kódů"
+                     android:textColor="@color/ivory"
+                     android:textSize="24sp"
+
+                     />
+             </androidx.cardview.widget.CardView>
+
+             <androidx.cardview.widget.CardView
+
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+                 android:layout_marginRight="8dp"
+                 android:backgroundTint="@color/kombu_green_dark"
+                 app:cardCornerRadius="4dp"
+                 app:cardElevation="4dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent">
+
+                 <TextView
+                     android:id="@+id/printed_count"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_margin="8dp"
+                     android:textColor="@color/ivory"
+                     android:textSize="24sp" />
+             </androidx.cardview.widget.CardView>
+         </LinearLayout>
+
+
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/layout_production_code"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginHorizontal="8dp"
+             android:layout_marginTop="16dp"
+             android:backgroundTint="@color/kombu_green_dark"
+             app:cardCornerRadius="4dp"
+             app:cardElevation="4dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/layout_printed_count">
+
+             <TextView
+                 android:id="@+id/production_code"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:layout_margin="8dp"
+                 android:ellipsize="marquee"
+                 android:fadingEdge="horizontal"
+                 android:focusable="true"
+                 android:focusableInTouchMode="true"
+                 android:marqueeRepeatLimit="marquee_forever"
+                 android:scrollHorizontally="true"
+                 android:singleLine="true"
+                 android:textColor="@color/ivory"
+                 android:textSize="24sp" />
+
+         </androidx.cardview.widget.CardView>
+                 -->
+     </LinearLayout>
 
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="50dp"
         android:alpha="0.5"
         android:layout_margin="24dp"
         android:id="@+id/logo"
@@ -297,39 +317,87 @@
     <LinearLayout
         android:id="@+id/print_buttons"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
+        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/button_print"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:backgroundTint="@color/han_purple_light"
-            android:elevation="16dp"
-            android:text="PRINT Standard"
-            android:textColor="@color/ivory"
-            android:textSize="50sp"
-            android:visibility="gone" />
+
 
         <Button
             android:id="@+id/button_print_datamax"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="@color/han_purple_light"
+            android:backgroundTint="@color/brunswick_green"
             android:elevation="16dp"
             android:shadowColor="@color/black"
             android:shadowDx="2"
             android:shadowDy="2"
+            android:textAllCaps="false"
             android:text="PRINT"
+           android:textStyle="bold"
             android:textColor="@color/ivory"
-            android:textSize="72sp" />
+            android:textSize="60sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/button_print_10"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/brunswick_green"
+                android:elevation="16dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textAllCaps="false"
+                android:text="10x"
+                android:textStyle="bold"
+                android:textColor="@color/ivory"
+                android:textSize="32dp" />
+            <Button
+                android:id="@+id/button_print_20"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/brunswick_green"
+                android:elevation="16dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textAllCaps="false"
+                android:text="20x"
+                android:textStyle="bold"
+                android:textColor="@color/ivory"
+                android:textSize="32dp" />
+            <Button
+                android:id="@+id/button_print_30"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/brunswick_green"
+                android:elevation="16dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:textAllCaps="false"
+                android:text="30x"
+                android:textStyle="bold"
+                android:textColor="@color/ivory"
+                android:textSize="32dp" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

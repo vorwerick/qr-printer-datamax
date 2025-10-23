@@ -15,10 +15,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <!---
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -89,10 +91,90 @@
 
 
             </androidx.cardview.widget.CardView>
+            -->
+            <!---
+                  <androidx.cardview.widget.CardView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginHorizontal="8dp"
+                      android:layout_marginTop="8dp"
+                      android:backgroundTint="@color/kombu_green_dark"
+                      app:cardCornerRadius="4dp"
+                      app:cardElevation="4dp">
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="8dp"
+                              android:text="Početk kusů v balení"
+                              android:textColor="@color/ivory_dark" />
+
+                          <EditText
+                              android:id="@+id/pieces_count"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginHorizontal="8dp"
+                              android:layout_marginBottom="8dp"
+                              android:backgroundTint="@color/han_purple_light"
+                              android:hint="početk kusů v balení"
+                              android:inputType="number"
+                              android:textColor="@color/ivory"
+                              android:textColorHint="@color/ivory"
+                              android:textSize="24sp" />
+                      </LinearLayout>
+                  </androidx.cardview.widget.CardView>
+
+                  <androidx.cardview.widget.CardView
+                      android:layout_width="match_parent"
+
+                      android:layout_height="wrap_content"
+                      android:layout_marginHorizontal="8dp"
+                      android:layout_marginTop="8dp"
+                      android:backgroundTint="@color/kombu_green_dark"
+                      app:cardCornerRadius="4dp"
+                      app:cardElevation="4dp">
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="8dp"
+
+                              android:text="Počet vteřin nového výrobku"
+                              android:textColor="@color/ivory_dark" />
 
 
+                          <EditText
+                              android:id="@+id/time_count"
+                              android:layout_width="match_parent"
+
+                              android:layout_height="wrap_content"
+                              android:layout_marginHorizontal="8dp"
+                              android:layout_marginBottom="8dp"
+
+                              android:backgroundTint="@color/han_purple_light"
+                              android:hint="počet vteřin výrobku"
+                              android:inputType="number"
+
+                              android:textColor="@color/ivory"
+                              android:textColorHint="@color/ivory"
+                              android:textSize="24sp" />
+                      </LinearLayout>
+                  </androidx.cardview.widget.CardView>
+
+                        -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="8dp"
@@ -109,86 +191,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:text="Početk kusů v balení"
-                        android:textColor="@color/ivory_dark" />
 
-                    <EditText
-                        android:id="@+id/pieces_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:backgroundTint="@color/han_purple_light"
-                        android:hint="početk kusů v balení"
-                        android:inputType="number"
-                        android:textColor="@color/ivory"
-                        android:textColorHint="@color/ivory"
-                        android:textSize="24sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/kombu_green_dark"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-
-                        android:text="Počet vteřin nového výrobku"
-                        android:textColor="@color/ivory_dark" />
-
-
-                    <EditText
-                        android:id="@+id/time_count"
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_marginBottom="8dp"
-
-                        android:backgroundTint="@color/han_purple_light"
-                        android:hint="počet vteřin výrobku"
-                        android:inputType="number"
-
-                        android:textColor="@color/ivory"
-                        android:textColorHint="@color/ivory"
-                        android:textSize="24sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/kombu_green_dark"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-
-                        android:text="IP adresa a port Datamax tiskárny"
+                        android:text="Adresa a port tiskárny v místní síti"
                         android:textColor="@color/ivory_dark" />
 
                     <LinearLayout
@@ -203,12 +207,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:layout_weight="0.4"
-                            android:backgroundTint="@color/han_purple_light"
+                            android:backgroundTint="@color/brunswick_green"
+                            android:importantForAutofill="no"
                             android:inputType="text"
 
                             android:textColor="@color/ivory"
                             android:textColorHint="@color/ivory"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            tools:ignore="LabelFor" />
 
                         <EditText
                             android:id="@+id/ip_port"
@@ -216,12 +222,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:layout_weight="0.2"
-                            android:backgroundTint="@color/han_purple_light"
+                            android:backgroundTint="@color/brunswick_green"
+                            android:importantForAutofill="no"
                             android:inputType="number"
 
                             android:textColor="@color/ivory"
                             android:textColorHint="@color/ivory"
-                            android:textSize="24sp" />
+                            android:textSize="24sp"
+                            tools:ignore="LabelFor" />
 
                     </LinearLayout>
 
@@ -249,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
 
-                        android:text="Připojení k Datamax tiskárně"
+                        android:text="Velikost tisknutého kódu (moduly)"
                         android:textColor="@color/ivory_dark" />
 
                     <LinearLayout
@@ -258,27 +266,22 @@
                         android:layout_marginBottom="8dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/connection_settings_status"
+
+                        <EditText
+                            android:id="@+id/size"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
-                            android:layout_weight="0.5"
+                            android:layout_weight="0.2"
+                            android:backgroundTint="@color/brunswick_green"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
 
-                            android:layout_marginBottom="8dp"
-                            android:text="Připojeno"
                             android:textColor="@color/ivory"
-                            android:textSize="24sp" />
+                            android:textColorHint="@color/ivory"
+                            android:textSize="24sp"
+                            tools:ignore="LabelFor" />
 
-                        <Button
-                            android:id="@+id/connect_datamax"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="8dp"
-                            android:layout_weight="0.3"
-                            android:backgroundTint="@color/han_purple_light"
-                            android:text="Připojit"
-                            android:textColor="@color/ivory" />
                     </LinearLayout>
 
 
@@ -295,7 +298,45 @@
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+
+                        android:text="Zarovnání horizontálně"
+                        android:textColor="@color/ivory_dark" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+
+                        <EditText
+                            android:id="@+id/offsetX"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_weight="0.2"
+                            android:backgroundTint="@color/brunswick_green"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+
+                            android:textColor="@color/ivory"
+                            android:textColorHint="@color/ivory"
+                            android:textSize="24sp"
+                            tools:ignore="LabelFor" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -303,6 +344,7 @@
 
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
                 android:backgroundTint="@color/kombu_green_dark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp">
@@ -316,28 +358,149 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:text="Vynulovat počet vytisknutých kódů"
+
+                        android:text="Zarovnání vertikálně"
                         android:textColor="@color/ivory_dark" />
 
-                    <Button
-                        android:id="@+id/reset_counter"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_margin="8dp"
-                        android:layout_weight="0.3"
-                        android:backgroundTint="@color/han_purple_light"
-                        android:text="Vynulovat"
-                        android:textColor="@color/ivory" />
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+
+                        <EditText
+                            android:id="@+id/offsetY"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_weight="0.2"
+                            android:backgroundTint="@color/brunswick_green"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+
+                            android:textColor="@color/ivory"
+                            android:textColorHint="@color/ivory"
+                            android:textSize="24sp"
+                            tools:ignore="LabelFor" />
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!--
+                  <androidx.cardview.widget.CardView
+                      android:layout_width="match_parent"
+
+                      android:layout_height="wrap_content"
+                      android:layout_marginHorizontal="8dp"
+                      android:layout_marginTop="8dp"
+                      android:backgroundTint="@color/kombu_green_dark"
+                      app:cardCornerRadius="4dp"
+                      app:cardElevation="4dp">
+
+                      <LinearLayout
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+
+                          <TextView
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_margin="8dp"
+
+                              android:text="Připojení k Datamax tiskárně"
+                              android:textColor="@color/ivory_dark" />
+
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginBottom="8dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:id="@+id/connection_settings_status"
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginHorizontal="8dp"
+                                  android:layout_weight="0.5"
+
+                                  android:layout_marginBottom="8dp"
+                                  android:text="Připojeno"
+                                  android:textColor="@color/ivory"
+                                  android:textSize="24sp" />
+
+                              <Button
+                                  android:id="@+id/connect_datamax"
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginHorizontal="8dp"
+                                  android:layout_weight="0.3"
+                                  android:backgroundTint="@color/brunswick_green"
+                                  android:text="Připojit"
+                                  android:textColor="@color/ivory" />
+                          </LinearLayout>
+
+
+                      </LinearLayout>
+                  </androidx.cardview.widget.CardView>
+
+                -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="8dp"
+                android:backgroundTint="@color/kombu_green_dark"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+
+            </androidx.cardview.widget.CardView>
+            <!---
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:backgroundTint="@color/kombu_green_dark"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="4dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp"
+                                    android:text="Vynulovat počet vytisknutých kódů"
+                                    android:textColor="@color/ivory_dark" />
+
+                                <Button
+                                    android:id="@+id/reset_counter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:layout_margin="8dp"
+                                    android:layout_weight="0.3"
+                                    android:backgroundTint="@color/han_purple_light"
+                                    android:text="Vynulovat"
+                                    android:textColor="@color/ivory" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                  -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
                 android:backgroundTint="@color/kombu_green_dark"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="4dp">
@@ -379,7 +542,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="8dp"
 
-        android:backgroundTint="@color/han_purple_light"
+        android:backgroundTint="@color/brunswick_green"
         android:text="Uložit"
 
         android:textColor="@color/ivory"

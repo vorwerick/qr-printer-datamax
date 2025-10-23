@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="han_purple">#6427CE</color>
+    <color name="brunswick_green">#32533D</color>
     <color name="kombu_green">#0F161A</color>
     <color name="kombu_green_dark">#1E2D34</color>
     <color name="ivory">#FFFCE8</color>
     <color name="ivory_dark">#FFF6C4</color>
 
     <color name="timberwolf">#D7D9CE</color>
-    <color name="han_purple_light">#8754DE</color>
     <color name="black">#FF000000</color>
 
     <color name="green">#228b22</color>
