@@ -38,7 +38,7 @@ class FirstFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    companion object{
+    companion object {
         const val PASSWORD = "1239"
     }
 
@@ -213,7 +213,7 @@ class FirstFragment : Fragment() {
 
         val buttonType1 = view.findViewById<Button>(R.id.button_type1)
         buttonType1.setOnClickListener {
-            showTypeChangeDialog(requireContext()){
+            showTypeChangeDialog(requireContext()) {
                 requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
                     putInt("code_type", 0)
                 }
@@ -223,7 +223,7 @@ class FirstFragment : Fragment() {
         }
         val buttonType2 = view.findViewById<Button>(R.id.button_type2)
         buttonType2.setOnClickListener {
-            showTypeChangeDialog(requireContext()){
+            showTypeChangeDialog(requireContext()) {
                 requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
                     putInt("code_type", 1)
                 }
@@ -313,13 +313,15 @@ class FirstFragment : Fragment() {
                     address?.let { a ->
                         when (type) {
                             1 -> {
-                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                ZebraPrinterUtils.printDataMatrixWithText(
+                                    a, p, c, getTextOverCode(), size, times = 10
+                                ) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }
 
                             else -> {
-                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size, times = 10) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }
@@ -342,13 +344,15 @@ class FirstFragment : Fragment() {
                     address?.let { a ->
                         when (type) {
                             1 -> {
-                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                ZebraPrinterUtils.printDataMatrixWithText(
+                                    a, p, c, getTextOverCode(), size, times = 20
+                                ) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }
 
                             else -> {
-                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size, times = 20) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }
@@ -370,13 +374,15 @@ class FirstFragment : Fragment() {
                     address?.let { a ->
                         when (type) {
                             1 -> {
-                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                ZebraPrinterUtils.printDataMatrixWithText(
+                                    a, p, c, getTextOverCode(), size, times = 30
+                                ) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }
 
                             else -> {
-                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size, times = 30) {
                                     Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                                 }
                             }

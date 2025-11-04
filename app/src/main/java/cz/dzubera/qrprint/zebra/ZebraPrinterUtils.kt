@@ -117,9 +117,9 @@ object ZebraPrinterUtils {
 
 // ⚙️ Dynamická korekce (kratší texty posuneme trochu doleva)
         val dynamicOffset = when {
-            textOverCode.length <= 2 -> -6  // jedno- nebo dvoupísmenné texty
-            textOverCode.length <= 5 -> 0   // krátké texty
-            textOverCode.length <= 10 -> 6  // střední texty
+            textOverCode.length <= 4 -> -6  // jedno- nebo dvoupísmenné texty
+            textOverCode.length <= 8 -> 0   // krátké texty
+            textOverCode.length <= 12 -> 6  // střední texty
             else -> 10                      // dlouhé texty
         }
 
