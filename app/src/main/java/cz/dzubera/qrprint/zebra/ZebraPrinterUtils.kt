@@ -16,12 +16,7 @@ object ZebraPrinterUtils {
     var task: Job? = null
 
     fun printDataMatrix(
-        ip: String,
-        port: Int,
-        data: String,
-        dimensions: Dimensions,
-        times: Int = 1,
-        onError: (String) -> Unit
+        ip: String, port: Int, data: String, dimensions: Dimensions, times: Int = 1, onError: (String) -> Unit
     ) {
 
         /*
@@ -68,10 +63,7 @@ object ZebraPrinterUtils {
     }
 
     fun testConnection(
-        ip: String,
-        port: Int,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
+        ip: String, port: Int, onSuccess: () -> Unit, onError: (String) -> Unit
     ) {
         task?.cancel()
         task = GlobalScope.launch {
@@ -100,6 +92,53 @@ object ZebraPrinterUtils {
                 delay(1000)
             }
 
+        }
+    }
+
+    fun printDataMatrixWithText(
+        ip: String,
+        port: Int,
+        data: String,
+        textOverCode: String,
+        dimensions: Dimensions,
+        times: Int = 1,
+        onError: (String) -> Unit
+    ) {
+        val fontBase = 60
+        var fontSize = fontBase-(textOverCode.length*1.6).toInt()
+        var centerX = 200+((fontSize/1.333)*(textOverCode.length*0.92))
+
+        val zpl =
+            "^XA\n" +
+                    "^FO${centerX -  (textOverCode.length*fontSize)},${0}\n" +
+                    "^A0N,${(fontSize)},${(fontSize)}\n" +
+                    "^FD${textOverCode}^FS\n" +
+                    "^FO${110},${60}\n" +
+                    "^BXN,${11},200\n" +
+                    "^FD${data}^FS\n" +
+                    "^XZ" // ZPL pro DataMatrix
+
+        GlobalScope.launch {
+            println("CARU FARU")
+            try {
+                Socket(ip, port).use { socket ->
+                    socket.soTimeout = 2000
+
+                    println("HARU GARU")
+                    val output = socket.getOutputStream()
+
+                    repeat(times) {
+                        output.write(zpl.toByteArray())
+                        output.flush()
+                    }
+
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                GlobalScope.launch(Dispatchers.Main) {
+                    onError(e.localizedMessage ?: "unknown error")
+                }
+            }
         }
     }
 }

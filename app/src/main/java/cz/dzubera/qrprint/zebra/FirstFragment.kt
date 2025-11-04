@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.provider.Telephony.Carriers.PASSWORD
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -36,15 +38,57 @@ class FirstFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
+    companion object{
+        const val PASSWORD = "1239"
+    }
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
+    fun showTextDialog(context: Context, onPrintConfirmed: (String) -> Unit) {
+        val layout = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(50, 40, 50, 10)
+        }
+
+        val inputCode = EditText(context).apply {
+            hint = "Text nad kódem"
+        }
+
+        val inputPassword = EditText(context).apply {
+            hint = "Heslo"
+            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
+        }
+
+        layout.addView(inputCode)
+        layout.addView(inputPassword)
+
+        val scrollView = ScrollView(context).apply {
+            addView(layout)
+        }
+
+        AlertDialog.Builder(ContextThemeWrapper(context, R.style.Theme_Material3_DayNight_Dialog_Alert))
+            .setTitle("Změna textu")
+
+            .setView(scrollView).setPositiveButton("Uložit") { dialog, _ ->
+                val code = inputCode.text.toString()
+                val password = inputPassword.text.toString()
+                if (password == PASSWORD) {
+                    onPrintConfirmed(code)
+                } else {
+                    Toast.makeText(context, "Nesprávné heslo", Toast.LENGTH_SHORT).show()
+                    //VibratorUtils.vibrate(context)
+                }
+                dialog.dismiss()
+            }.setNegativeButton("Zpět") { dialog, _ ->
+                dialog.cancel()
+            }.show()
+    }
 
     fun showPrintDialog(context: Context, onPrintConfirmed: (String) -> Unit) {
         val layout = LinearLayout(context).apply {
@@ -71,22 +115,19 @@ class FirstFragment : Fragment() {
         AlertDialog.Builder(ContextThemeWrapper(context, R.style.Theme_Material3_DayNight_Dialog_Alert))
             .setTitle("Změna kódu")
 
-            .setView(scrollView)
-            .setPositiveButton("Uložit") { dialog, _ ->
+            .setView(scrollView).setPositiveButton("Uložit") { dialog, _ ->
                 val code = inputCode.text.toString()
                 val password = inputPassword.text.toString()
-                if (password == "1239") {
+                if (password == PASSWORD) {
                     onPrintConfirmed(code)
                 } else {
                     Toast.makeText(context, "Nesprávné heslo", Toast.LENGTH_SHORT).show()
                     //VibratorUtils.vibrate(context)
                 }
                 dialog.dismiss()
-            }
-            .setNegativeButton("Zpět") { dialog, _ ->
+            }.setNegativeButton("Zpět") { dialog, _ ->
                 dialog.cancel()
-            }
-            .show()
+            }.show()
     }
 
     fun getCode(): String {
@@ -96,12 +137,9 @@ class FirstFragment : Fragment() {
 
     fun getDimensions(context: Context): Dimensions {
         return Dimensions(
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE)
-                .getInt("size", 10),
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE)
-                .getInt("offsetX", 80),
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE)
-                .getInt("offsetY", 80)
+            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("size", 12),
+            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetX", 80),
+            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetY", 80)
         )
     }
 
@@ -130,12 +168,31 @@ class FirstFragment : Fragment() {
         val code = getCode()
 
         view.findViewById<TextView>(R.id.code_text).text = code
+        view.findViewById<TextView>(R.id.text_over_code).text = getTextOverCode()
 
-        val address = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE)
-            .getString("address", null)
+        val address = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("address", null)
         val port =
-            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("port", "6101")
-                ?.toIntOrNull()
+            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("port", "6101")?.toIntOrNull()
+
+        val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
+
+        val buttonType1 = view.findViewById<Button>(R.id.button_type1)
+        buttonType1.setOnClickListener {
+            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
+                putInt("code_type", 0)
+            }
+            applyButtonsView(0, view)
+        }
+        val buttonType2 = view.findViewById<Button>(R.id.button_type2)
+        buttonType2.setOnClickListener {
+            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
+                putInt("code_type", 1)
+            }
+            applyButtonsView(1, view)
+        }
+
+        applyButtonsView(type, view)
+
 
 
 
@@ -150,16 +207,27 @@ class FirstFragment : Fragment() {
             }
         }
 
+        view.findViewById<ImageButton>(R.id.button_change_text).setOnClickListener {
 
-        view.findViewById<Button>(R.id.button_change_code).setOnClickListener {
+            showTextDialog(requireContext(), { s ->
+
+                view.findViewById<TextView>(R.id.text_over_code).text = s
+                requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
+                    putString(
+                        "text_over_code", s
+                    )
+                }
+            })
+
+        }
+        view.findViewById<ImageButton>(R.id.button_change_code).setOnClickListener {
 
             showPrintDialog(requireContext(), { s ->
 
                 view.findViewById<TextView>(R.id.code_text).text = s
                 requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
                     putString(
-                        "code",
-                        s
+                        "code", s
                     )
                 }
             })
@@ -167,15 +235,26 @@ class FirstFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.button_print_datamax).setOnClickListener {
             val c = getCode()
+            val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
                 val size = getDimensions(context)
                 port?.let { p ->
                     address?.let { a ->
-                        ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG)
-                                .show()
+                        when (type) {
+                            1 -> {
+                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
+
+                            else -> {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         }
+
                     }
                 }
             }
@@ -191,8 +270,7 @@ class FirstFragment : Fragment() {
                 port?.let { p ->
                     address?.let { a ->
                         ZebraPrinterUtils.printDataMatrix(a, p, c, size, 10) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG)
-                                .show()
+                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -209,8 +287,7 @@ class FirstFragment : Fragment() {
                 port?.let { p ->
                     address?.let { a ->
                         ZebraPrinterUtils.printDataMatrix(a, p, c, size, 20) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG)
-                                .show()
+                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -226,8 +303,7 @@ class FirstFragment : Fragment() {
                 port?.let { p ->
                     address?.let { a ->
                         ZebraPrinterUtils.printDataMatrix(a, p, c, size, 30) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG)
-                                .show()
+                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -236,6 +312,45 @@ class FirstFragment : Fragment() {
         }
 
 
+    }
+
+
+    private fun getTextOverCode(): String {
+        return requireContext().getSharedPreferences("STORAGE", Context.MODE_PRIVATE)
+            .getString("text_over_code", "není nastaveno").toString()
+    }
+
+    fun applyButtonsView(type: Int, view: View = requireView()) {
+        when (type) {
+            1 -> {
+
+                view.findViewById<Button>(R.id.button_type1).backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.brunswick_green)
+                view.findViewById<Button>(R.id.button_type1)
+                    .setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.ivory))
+                view.findViewById<Button>(R.id.button_type2).backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.ivory)
+                view.findViewById<Button>(R.id.button_type2)
+                    .setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.brunswick_green))
+                view.findViewById<CardView>(R.id.layout_text_over_code).visibility = View.VISIBLE
+                view.findViewById<ImageButton>(R.id.button_change_text).visibility = View.VISIBLE
+            }
+
+            else -> {
+                view.findViewById<Button>(R.id.button_type2).backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.brunswick_green)
+                view.findViewById<Button>(R.id.button_type2)
+                    .setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.ivory))
+                view.findViewById<Button>(R.id.button_type1).backgroundTintList =
+                    ContextCompat.getColorStateList(requireContext(), R.color.ivory)
+                view.findViewById<Button>(R.id.button_type1)
+                    .setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.brunswick_green))
+
+                view.findViewById<CardView>(R.id.layout_text_over_code).visibility = View.GONE
+                view.findViewById<ImageButton>(R.id.button_change_text).visibility = View.GONE
+
+            }
+        }
     }
 
 
