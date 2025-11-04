@@ -7,6 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.net.Socket
+import kotlin.math.max
 
 data class Dimensions(val size: Int, val offsetX: Int, val offsetY: Int)
 
@@ -104,19 +105,36 @@ object ZebraPrinterUtils {
         times: Int = 1,
         onError: (String) -> Unit
     ) {
-        val fontBase = 60
-        var fontSize = fontBase-(textOverCode.length*1.6).toInt()
-        var centerX = 200+((fontSize/1.333)*(textOverCode.length*0.92))
+        val labelWidth = 400 // šířka etikety
+        val centerX = labelWidth / 2
 
-        val zpl =
-            "^XA\n" +
-                    "^FO${centerX -  (textOverCode.length*fontSize)},${0}\n" +
-                    "^A0N,${(fontSize)},${(fontSize)}\n" +
-                    "^FD${textOverCode}^FS\n" +
-                    "^FO${110},${60}\n" +
-                    "^BXN,${11},200\n" +
-                    "^FD${data}^FS\n" +
-                    "^XZ" // ZPL pro DataMatrix
+        val fontBase = 60
+        val fontSize = max(20, fontBase - (textOverCode.length * 1.6).toInt())
+
+// Odhad reálné šířky znaku pro font A0N
+        val charWidthFactor = 0.58
+        val textWidth = textOverCode.length * (fontSize * charWidthFactor)
+
+// ⚙️ Dynamická korekce (kratší texty posuneme trochu doleva)
+        val dynamicOffset = when {
+            textOverCode.length <= 2 -> -6  // jedno- nebo dvoupísmenné texty
+            textOverCode.length <= 5 -> 0   // krátké texty
+            textOverCode.length <= 10 -> 6  // střední texty
+            else -> 10                      // dlouhé texty
+        }
+
+        val textStartX = (centerX - textWidth / 2 + dynamicOffset).toInt()
+
+        val zpl = """
+    ^XA
+    ^FO${textStartX},0
+    ^A0N,${fontSize},${fontSize}
+    ^FD${textOverCode}^FS
+    ^FO110,60
+    ^BXN,11,200
+    ^FD${data}^FS
+    ^XZ
+""".trimIndent()
 
         GlobalScope.launch {
             println("CARU FARU")

@@ -90,6 +90,41 @@ class FirstFragment : Fragment() {
             }.show()
     }
 
+    fun showTypeChangeDialog(context: Context, onActionConfirmed: () -> Unit) {
+        val layout = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(50, 40, 50, 10)
+        }
+
+
+        val inputPassword = EditText(context).apply {
+            hint = "Heslo"
+            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
+        }
+
+        layout.addView(inputPassword)
+
+        val scrollView = ScrollView(context).apply {
+            addView(layout)
+        }
+
+        AlertDialog.Builder(ContextThemeWrapper(context, R.style.Theme_Material3_DayNight_Dialog_Alert))
+            .setTitle("Změna typu")
+
+            .setView(scrollView).setPositiveButton("OK") { dialog, _ ->
+                val password = inputPassword.text.toString()
+                if (password == PASSWORD) {
+                    onActionConfirmed()
+                } else {
+                    Toast.makeText(context, "Nesprávné heslo", Toast.LENGTH_SHORT).show()
+                    //VibratorUtils.vibrate(context)
+                }
+                dialog.dismiss()
+            }.setNegativeButton("Zpět") { dialog, _ ->
+                dialog.cancel()
+            }.show()
+    }
+
     fun showPrintDialog(context: Context, onPrintConfirmed: (String) -> Unit) {
         val layout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
@@ -178,17 +213,22 @@ class FirstFragment : Fragment() {
 
         val buttonType1 = view.findViewById<Button>(R.id.button_type1)
         buttonType1.setOnClickListener {
-            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
-                putInt("code_type", 0)
+            showTypeChangeDialog(requireContext()){
+                requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
+                    putInt("code_type", 0)
+                }
+                applyButtonsView(0, view)
             }
-            applyButtonsView(0, view)
+
         }
         val buttonType2 = view.findViewById<Button>(R.id.button_type2)
         buttonType2.setOnClickListener {
-            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
-                putInt("code_type", 1)
+            showTypeChangeDialog(requireContext()){
+                requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).edit() {
+                    putInt("code_type", 1)
+                }
+                applyButtonsView(1, view)
             }
-            applyButtonsView(1, view)
         }
 
         applyButtonsView(type, view)
@@ -233,6 +273,7 @@ class FirstFragment : Fragment() {
             })
 
         }
+
         view.findViewById<Button>(R.id.button_print_datamax).setOnClickListener {
             val c = getCode()
             val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
@@ -264,14 +305,26 @@ class FirstFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button_print_10).setOnClickListener {
             val c = getCode()
+            val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
                 val size = getDimensions(context)
                 port?.let { p ->
                     address?.let { a ->
-                        ZebraPrinterUtils.printDataMatrix(a, p, c, size, 10) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                        when (type) {
+                            1 -> {
+                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
+
+                            else -> {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         }
+
                     }
                 }
             }
@@ -281,14 +334,26 @@ class FirstFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button_print_20).setOnClickListener {
             val c = getCode()
+            val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
                 val size = getDimensions(context)
                 port?.let { p ->
                     address?.let { a ->
-                        ZebraPrinterUtils.printDataMatrix(a, p, c, size, 20) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                        when (type) {
+                            1 -> {
+                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
+
+                            else -> {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         }
+
                     }
                 }
             }
@@ -297,14 +362,26 @@ class FirstFragment : Fragment() {
 
         view.findViewById<Button>(R.id.button_print_30).setOnClickListener {
             val c = getCode()
+            val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
                 val size = getDimensions(context)
                 port?.let { p ->
                     address?.let { a ->
-                        ZebraPrinterUtils.printDataMatrix(a, p, c, size, 30) {
-                            Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                        when (type) {
+                            1 -> {
+                                ZebraPrinterUtils.printDataMatrixWithText(a, p, c, getTextOverCode(), size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
+
+                            else -> {
+                                ZebraPrinterUtils.printDataMatrix(a, p, c, size) {
+                                    Toast.makeText(context, "Chyba připojení: $it", Toast.LENGTH_LONG).show()
+                                }
+                            }
                         }
+
                     }
                 }
             }
