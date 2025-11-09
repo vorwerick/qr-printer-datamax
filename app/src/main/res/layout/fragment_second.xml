@@ -326,8 +326,7 @@
                             android:layout_weight="0.2"
                             android:backgroundTint="@color/brunswick_green"
                             android:importantForAutofill="no"
-                            android:inputType="number"
-
+                            android:inputType="numberSigned"
                             android:textColor="@color/ivory"
                             android:textColorHint="@color/ivory"
                             android:textSize="24sp"
@@ -377,7 +376,7 @@
                             android:layout_weight="0.2"
                             android:backgroundTint="@color/brunswick_green"
                             android:importantForAutofill="no"
-                            android:inputType="number"
+                            android:inputType="numberSigned"
 
                             android:textColor="@color/ivory"
                             android:textColorHint="@color/ivory"

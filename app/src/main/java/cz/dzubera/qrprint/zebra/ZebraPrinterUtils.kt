@@ -112,28 +112,26 @@ object ZebraPrinterUtils {
         val fontSize = max(20, fontBase - (textOverCode.length * 1.6).toInt())
 
 // Odhad reálné šířky znaku pro font A0N
-        val charWidthFactor = 0.58
-        val textWidth = textOverCode.length * (fontSize * charWidthFactor)
+        val charWidthFactor = 1
+        val textWidth = textOverCode.length * ((fontSize))
 
-// ⚙️ Dynamická korekce (kratší texty posuneme trochu doleva)
-        val dynamicOffset = when {
-            textOverCode.length <= 4 -> -6  // jedno- nebo dvoupísmenné texty
-            textOverCode.length <= 8 -> 0   // krátké texty
-            textOverCode.length <= 12 -> 6  // střední texty
-            else -> 10                      // dlouhé texty
-        }
 
-        val textStartX = (centerX - textWidth / 2 + dynamicOffset).toInt()
+// Výpočet X pozice textu (pro ruční posun, pokud FB nebude použit)
+        val textStartX = (centerX - textWidth / 2) - (textWidth/8).toInt()
 
         val zpl = """
-    ^XA
-    ^FO${textStartX},0
-    ^A0N,${fontSize},${fontSize}
-    ^FD${textOverCode}^FS
-    ^FO110,60
-    ^BXN,11,200
-    ^FD${data}^FS
-    ^XZ
+^XA
+^LH${0},0
+
+^FO${textStartX},${fontSize - 12}
+^A2N,${fontSize},${fontSize/2}
+^FD${textOverCode}^FS
+
+^FO${dimensions.offsetX},${dimensions.offsetY}
+^BXN,11,200
+^FD${data}^FS
+
+^XZ
 """.trimIndent()
 
         GlobalScope.launch {
