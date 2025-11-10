@@ -105,35 +105,24 @@ object ZebraPrinterUtils {
         times: Int = 1,
         onError: (String) -> Unit
     ) {
-        val labelWidth = 400 // šířka etikety
-        val centerX = labelWidth / 2
-
-        val fontBase = 60
-        val fontSize = max(20, fontBase - (textOverCode.length * 1.6).toInt())
-
-// Odhad reálné šířky znaku pro font A0N
-        val charWidthFactor = 1
-        val textWidth = textOverCode.length * ((fontSize))
-
-
-// Výpočet X pozice textu (pro ruční posun, pokud FB nebude použit)
-        val textStartX = (centerX - textWidth / 2) - (textWidth/8).toInt()
+        val labelWidth = 380 // šířka etikety
+        val fontBase = 50
+        val fontSize = max(20, fontBase - (textOverCode.length * 3).toInt())
 
         val zpl = """
 ^XA
-^LH${0},0
+^LH0,0
 
-^FO${textStartX},${fontSize - 12}
-^A2N,${fontSize},${fontSize/2}
+^FO0,${35+(textOverCode.length*2)}^FB${labelWidth},1,0,C,0
+^A2N,${fontSize},${fontSize} 
 ^FD${textOverCode}^FS
 
 ^FO${dimensions.offsetX},${dimensions.offsetY}
-^BXN,11,200
+^BXN,${dimensions.size},200
 ^FD${data}^FS
 
 ^XZ
 """.trimIndent()
-
         GlobalScope.launch {
             println("CARU FARU")
             try {

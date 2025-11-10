@@ -25,8 +25,7 @@ class SecondFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_second, container, false)
 
@@ -43,20 +42,31 @@ class SecondFragment : Fragment() {
         view.findViewById<TextView>(R.id.version).text =
             BuildConfig.VERSION_NAME + "\n" + "build " + BuildConfig.VERSION_CODE
 
+        val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
-        val address = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE)
-            .getString("address", null)
+        val address = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("address", null)
         val port =
-            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("port", "6101")
-                ?.toIntOrNull()
+            requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getString("port", "6101")?.toIntOrNull()
+
+        var size = 10
+        var offsetX = 80
+        var offsetY = 80
+
+        when (type) {
+            1 -> {
+                size = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("size1", 10)
+                offsetX = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("offsetX1", 80)
+                offsetY = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("offsetY1", 80)
+            }
+
+            else -> {
+                size = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("size", 10)
+                offsetX = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("offsetX", 80)
+                offsetY = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("offsetY", 80)
+            }
+        }
 
 
-        val size = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE)
-            .getInt("size", 10)
-        val offsetX = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE)
-            .getInt("offsetX", 80)
-        val offsetY = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE)
-            .getInt("offsetY", 80)
 
         view.findViewById<EditText>(R.id.size).setText(size.toString())
         view.findViewById<EditText>(R.id.offsetX).setText(offsetX.toString())
@@ -65,33 +75,42 @@ class SecondFragment : Fragment() {
         view.findViewById<EditText>(R.id.ip_port).setText(port.toString())
 
 
-        /*
-        view.findViewById<ImageButton>(R.id.button_scan).setOnClickListener {
-            val intent = Intent(context, ScanQRActivity::class.java)
-            startActivity(intent)
-        }
-
-         */
-
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
 
 
             requireContext().getSharedPreferences("STORAGE", Context.MODE_PRIVATE).edit() {
-                putString("address", view.findViewById<EditText>(R.id.ip_address).text.toString())
-                    .putString("port", view.findViewById<EditText>(R.id.ip_port).text.toString())
-                    .putInt(
-                        "size",
-                        view.findViewById<EditText>(R.id.size).text.toString().toInt()
-                    )
-                    .putInt(
-                        "offsetX",
-                        view.findViewById<EditText>(R.id.offsetX).text.toString().toInt()
-                    )
-                    .putInt(
-                        "offsetY",
-                        view.findViewById<EditText>(R.id.offsetY).text.toString().toInt()
-                    )
+                val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
+
+                when (type) {
+                    1 -> {
+                        putString(
+                            "address",
+                            view.findViewById<EditText>(R.id.ip_address).text.toString()
+                        ).putString("port", view.findViewById<EditText>(R.id.ip_port).text.toString()).putInt(
+                                "size1", view.findViewById<EditText>(R.id.size).text.toString().toInt()
+                            ).putInt(
+                                "offsetX1", view.findViewById<EditText>(R.id.offsetX).text.toString().toInt()
+                            ).putInt(
+                                "offsetY1", view.findViewById<EditText>(R.id.offsetY).text.toString().toInt()
+                            )
+
+                    }
+
+                    else -> {
+                        putString(
+                            "address",
+                            view.findViewById<EditText>(R.id.ip_address).text.toString()
+                        ).putString("port", view.findViewById<EditText>(R.id.ip_port).text.toString()).putInt(
+                                "size", view.findViewById<EditText>(R.id.size).text.toString().toInt()
+                            ).putInt(
+                                "offsetX", view.findViewById<EditText>(R.id.offsetX).text.toString().toInt()
+                            ).putInt(
+                                "offsetY", view.findViewById<EditText>(R.id.offsetY).text.toString().toInt()
+                            )
+                    }
+                }
+
             }
 
 

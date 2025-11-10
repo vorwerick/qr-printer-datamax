@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.provider.Telephony.Carriers.PASSWORD
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.Menu
@@ -170,12 +169,20 @@ class FirstFragment : Fragment() {
             .getString("code", "není nastaveno").toString()
     }
 
-    fun getDimensions(context: Context): Dimensions {
-        return Dimensions(
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("size", 12),
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetX", 80),
-            context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetY", 80)
-        )
+    fun getDimensions(context: Context, type: Int): Dimensions {
+        return when (type) {
+            1 -> Dimensions(
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("size1", 12),
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetX1", 80),
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetY1", 80)
+            )
+
+            else -> Dimensions(
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("size", 12),
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetX", 80),
+                context.getSharedPreferences("STORAGE", Context.MODE_PRIVATE).getInt("offsetY", 80)
+            )
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -279,7 +286,7 @@ class FirstFragment : Fragment() {
             val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
-                val size = getDimensions(context)
+                val size = getDimensions(context, type)
                 port?.let { p ->
                     address?.let { a ->
                         when (type) {
@@ -308,7 +315,7 @@ class FirstFragment : Fragment() {
             val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
-                val size = getDimensions(context)
+                val size = getDimensions(context, type)
                 port?.let { p ->
                     address?.let { a ->
                         when (type) {
@@ -339,7 +346,7 @@ class FirstFragment : Fragment() {
             val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
-                val size = getDimensions(context)
+                val size = getDimensions(context, type)
                 port?.let { p ->
                     address?.let { a ->
                         when (type) {
@@ -369,7 +376,7 @@ class FirstFragment : Fragment() {
             val type = requireContext().getSharedPreferences("STORAGE", MODE_PRIVATE).getInt("code_type", 0)
 
             context?.let { context ->
-                val size = getDimensions(context)
+                val size = getDimensions(context, type)
                 port?.let { p ->
                     address?.let { a ->
                         when (type) {
